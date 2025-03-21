@@ -2177,3 +2177,4 @@ C:/Hoc_/WebsiteBanHang/WebsiteBanHang/WebsiteBanHang/WebsiteBanHang/obj/Debug/ne
 /Users/trandat/Desktop/WebsiteBanHang/WebsiteBanHang/WebsiteBanHang/WebsiteBanHang/obj/Debug/net9.0/WebsiteBanHang.pdb
 /Users/trandat/Desktop/WebsiteBanHang/WebsiteBanHang/WebsiteBanHang/WebsiteBanHang/obj/Debug/net9.0/WebsiteBanHang.genruntimeconfig.cache
 /Users/trandat/Desktop/WebsiteBanHang/WebsiteBanHang/WebsiteBanHang/WebsiteBanHang/obj/Debug/net9.0/ref/WebsiteBanHang.dll
+/Users/trandat/Desktop/WebsiteBanHang/WebsiteBanHang/WebsiteBanHang/WebsiteBanHang/obj/Debug/net9.0/WebsiteBanHang.sourcelink.json

@@ -1,22 +1,17 @@
-# Bước 1: Dùng image ASP.NET Core runtime để chạy ứng dụng
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+# Sử dụng .NET SDK 9.0 để build
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /app
-EXPOSE 8080
 
-# Bước 2: Dùng image .NET SDK để build ứng dụng
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
+# Sao chép tệp dự án và khôi phục dependencies
+COPY *.csproj ./
+RUN dotnet restore
 
-# Sửa đường dẫn COPY để khớp với repo của bạn
-COPY ["WebsiteBanHangT6/WebsiteBanHangT6.csproj", "WebsiteBanHangT6/"]
-WORKDIR "/src/WebsiteBanHangT6"
+# Sao chép toàn bộ source code và build ứng dụng
+COPY . ./
+RUN dotnet publish -c Release -o /publish
 
-RUN dotnet restore "./WebsiteBanHangT6.csproj"
-COPY . .
-RUN dotnet publish "./WebsiteBanHangT6.csproj" -c Release -o /app/publish
-
-# Bước 3: Chạy ứng dụng
-FROM base AS final
+# Sử dụng .NET runtime 9.0 để chạy ứng dụng
+FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
-COPY --from=build /app/publish .
-ENTRYPOINT ["dotnet", "WebsiteBanHangT6.dll"]
+COPY --from=build /publish .
+ENTRYPOINT ["dotnet", "WebsiteBanHang.dll"]
