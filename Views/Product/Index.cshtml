@@ -1,0 +1,76 @@
+﻿@model IEnumerable<WebsiteBanHang.Models.Product>
+
+<div class="container mt-4">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center text-primary"><i class="fa-solid fa-box-open"></i> Danh sách sản phẩm</h2>
+        <hr>
+
+        <!-- Bộ lọc sản phẩm -->
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <input type="text" id="searchInput" class="form-control shadow-sm" placeholder="🔎 Tìm kiếm sản phẩm..." onkeyup="filterProducts()">
+            </div>
+            <div class="col-md-4">
+                <select id="categoryFilter" class="form-select shadow-sm" onchange="filterProducts()">
+                    <option value="">🎭 Tất cả thể loại</option>
+                    @foreach (var category in Model.Select(p => p.Category?.Name).Distinct())
+                    {
+                        <option value="@category">@category</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <table class="table table-hover" id="productTable">
+            <thead class="table-dark">
+                <tr>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá</th>
+                    <th>Mô tả</th>
+                    <th>Thể loại</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr class="product-row shadow-sm" data-name="@product.Name.ToLower()" data-category="@product.Category?.Name">
+                        <td><b>@product.Name</b></td>
+                        <td class="text-success">@product.Price.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</td>
+                        <td>@product.Description</td>
+                        <td class="text-primary">@product.Category?.Name</td>
+                        <td>
+                            <a asp-action="Display" asp-route-id="@product.Id" class="btn btn-outline-info btn-sm">
+                                <i class="fas fa-eye"></i> Xem
+                            </a>
+                            <a asp-action="Update" asp-route-id="@product.Id" class="btn btn-outline-warning btn-sm">
+                                <i class="fas fa-edit"></i> Sửa
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@product.Id" class="btn btn-outline-danger btn-sm">
+                                <i class="fas fa-trash"></i> Xóa
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function filterProducts() {
+        let searchValue = document.getElementById("searchInput").value.toLowerCase();
+        let categoryValue = document.getElementById("categoryFilter").value;
+        let rows = document.querySelectorAll(".product-row");
+
+        rows.forEach(row => {
+            let name = row.getAttribute("data-name");
+            let category = row.getAttribute("data-category");
+
+            let matchName = name.includes(searchValue);
+            let matchCategory = categoryValue === "" || category === categoryValue;
+
+            row.style.display = (matchName && matchCategory) ? "" : "none";
+        });
+    }
+</script>

@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "Xác thực email";
+}
+
+<div class="container text-center mt-5">
+    <h2>Xác thực email của bạn</h2>
+    <p>Chúng tôi đã gửi một email xác thực đến địa chỉ <strong>@ViewBag.Email</strong>.</p>
+    <p>Vui lòng kiểm tra hộp thư đến và nhấn vào liên kết xác nhận.</p>
+    <p>Nếu bạn chưa nhận được email, vui lòng kiểm tra mục **Spam/Junk** hoặc nhấn vào nút bên dưới để gửi lại.</p>
+
+    <form method="post" asp-action="ResendConfirmationEmail">
+        <input type="hidden" name="email" value="@ViewBag.Email" />
+        <button type="submit" class="btn btn-primary">Gửi lại email xác nhận</button>
+    </form>
+
+    <a href="@Url.Action("Login", "Account")" class="btn btn-secondary mt-3">Quay lại đăng nhập</a>
+</div>

@@ -1,0 +1,34 @@
+﻿@model WebsiteBanHang.Models.Product
+
+<div class="container mt-4">
+    <div class="card shadow-lg p-4" style="background: linear-gradient(to right, #ff9a9e, #fad0c4); border-radius: 15px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);">
+        <h2 class="text-center text-white"><i class="fa-solid fa-cookie"></i> @Model.Name</h2>
+        <hr class="bg-white">
+
+        <div class="row">
+            <div class="col-md-6 text-center">
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" alt="Ảnh sản phẩm" class="img-fluid rounded shadow-lg" style="max-width: 100%; height: auto; border-radius: 10px;">
+                }
+                else
+                {
+                    <p class="text-white">Không có hình ảnh</p>
+                }
+            </div>
+            <div class="col-md-6">
+                <h3 class="text-success<i class="fa-solid fa-coins"></i> Giá: @Model.Price.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</h3>
+                <p class="fs-5 text-white">@Model.Description</p>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a asp-action="Index" class="btn btn-light btn-lg shadow-sm">
+                <i class="fa-solid fa-ice-cream"></i> Quay lại
+            </a>
+            <a asp-action="Update" asp-route-id="@Model.Id" class="btn btn-danger btn-lg shadow-sm ms-3">
+                <i class="fa-solid fa-hotdog"></i> Chỉnh sửa
+            </a>
+        </div>
+    </div>
+</div>

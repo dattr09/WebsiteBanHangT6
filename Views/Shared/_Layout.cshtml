@@ -1,0 +1,161 @@
+﻿@using Microsoft.AspNetCore.Identity
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DatHoangTu Snacks Store</title>
+    <link rel="icon" type="image/png" href="~/images/logo.ico" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebsiteBanHang.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <style>
+        /* Navbar màu hồng nhạt với hiệu ứng 3D */
+        .navbar {
+            background: linear-gradient(to right, #ff8eb3, #ffb6c1); /* Hồng nhạt dần */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Hiệu ứng 3D */
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important; /* Màu chữ trắng */
+            font-weight: 500;
+        }
+
+        /* Hover menu */
+        .navbar-nav .nav-item:hover {
+            background-color: #ff6699; /* Màu hồng đậm khi hover */
+            border-radius: 5px;
+        }
+
+        /* Căn giữa menu */
+        .navbar-nav {
+            flex-direction: row;
+            justify-content: center;
+            width: 100%;
+            text-align: right;
+        }
+
+        /* Body */
+        body {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Container chính */
+        .container {
+            flex: 1;
+            padding-top: 50px;
+        }
+
+        /* Footer màu hồng nhạt với hiệu ứng 3D */
+        footer {
+            background: linear-gradient(to right, #ff8eb3, #ffb6c1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            padding: 5px 0;
+        }
+
+            footer a {
+                color: #333;
+                text-decoration: none;
+            }
+
+                footer a:hover {
+                    color: #ff6699;
+                }
+
+        /* Main */
+        main {
+            padding-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/logo.ico" alt="Logo" style="height: 40px; margin-right: 10px;">
+                    <i class="fa-solid fa-cookie-bite"></i> DatHoangTu Snacks Store
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home"></i> Trang Chủ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Add">
+                                <i class="fas fa-plus-circle"></i> Thêm Sản Phẩm
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Product" asp-action="">
+                                <i class="fas fa-box"></i> Sản Phẩm
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Categories" asp-action="">
+                                <i class="fas fa-list"></i> Thể Loại
+                            </a>
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 DatHoangTu Snacks Store</p>
+            <p>
+                Follow us on
+                <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i> Facebook</a> |
+                <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+            </p>
+            <p>
+                <a asp-area="" asp-controller="Home" asp-action="Privacy" class="btn btn-outline-dark btn-sm">
+                    <i class="fas fa-shield-alt"></i> Privacy Policy
+                </a>
+            </p>
+        </div>
+    </footer>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    @inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    var currentUser = await UserManager.GetUserAsync(User);
+    if (currentUser != null && !await UserManager.IsEmailConfirmedAsync(currentUser))
+    {
+        <script>
+            window.location.href = '@Url.Action("EmailVerificationPending", "Account")';
+        </script>
+    }
+}
+
+</body>
+</html>

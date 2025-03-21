@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Chính sách bảo mật";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 border-0 rounded-4">
+        <h1 class="text-center text-primary fw-bold">@ViewData["Title"]</h1>
+        <hr class="w-50 mx-auto">
+        <p class="lead text-muted text-center fst-italic">
+            Chúng tôi cam kết bảo vệ quyền riêng tư của bạn và đảm bảo tính bảo mật thông tin cá nhân.
+        </p>
+
+        <div class="mt-4">
+            <h3 class="text-secondary fw-semibold"><i class="fas fa-user-shield"></i> 1. Thu thập thông tin cá nhân</h3>
+            <p>
+                Chúng tôi chỉ thu thập thông tin cần thiết để cung cấp dịch vụ và cải thiện trải nghiệm người dùng.
+            </p>
+        </div>
+
+        <div class="mt-4">
+            <h3 class="text-secondary fw-semibold"><i class="fas fa-file-alt"></i> 2. Cách sử dụng thông tin</h3>
+            <p>
+                Dữ liệu của bạn được sử dụng để nâng cao trải nghiệm trang web, hỗ trợ khách hàng và đảm bảo an toàn bảo mật.
+            </p>
+        </div>
+
+        <div class="mt-4">
+            <h3 class="text-secondary fw-semibold"><i class="fas fa-lock"></i> 3. Bảo vệ thông tin</h3>
+            <p>
+                Chúng tôi áp dụng các biện pháp bảo mật tiên tiến để bảo vệ thông tin cá nhân của bạn khỏi rủi ro.
+            </p>
+        </div>
+
+        <div class="mt-4">
+            <h3 class="text-secondary fw-semibold"><i class="fas fa-user-check"></i> 4. Quyền lợi của bạn</h3>
+            <p>
+                Bạn có quyền xem, chỉnh sửa hoặc yêu cầu xóa thông tin cá nhân bất cứ lúc nào.
+            </p>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="/" class="btn btn-primary btn-lg rounded-pill shadow-sm">
+                <i class="fas fa-arrow-left"></i> Quay lại trang chủ
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        background: #fff;
+        transition: all 0.3s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+    h3 i {
+        color: #0d6efd;
+        margin-right: 8px;
+    }
+</style>

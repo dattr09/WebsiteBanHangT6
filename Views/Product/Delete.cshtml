@@ -1,0 +1,25 @@
+﻿@model WebsiteBanHang.Models.Product
+
+<div class="container mt-4">
+    <div class="card shadow-lg p-4" style="background: linear-gradient(to right, #ff8eb3, #ffb6c1); border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <h2 class="text-center text-white"><i class="fa-solid fa-cookie-bite"></i> Xóa sản phẩm</h2>
+        <hr class="bg-white">
+
+        <div class="alert alert-warning text-center" style="border-radius: 10px;">
+            <p class="fs-5 fw-bold text-black">Bạn có chắc chắn muốn xóa sản phẩm <span class="text-danger">@Model.Name</span>?</p>
+        </div>
+
+        <form asp-action="DeleteConfirmed" method="post">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-danger btn-lg shadow-sm">
+                    <i class="fa-solid fa-trash-can"></i> Xóa sản phẩm
+                </button>
+                <a asp-action="Index" class="btn btn-light btn-lg shadow-sm ms-3">
+                    <i class="fa-solid fa-ice-cream"></i> Hủy bỏ
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
