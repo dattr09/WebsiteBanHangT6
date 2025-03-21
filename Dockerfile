@@ -6,7 +6,11 @@ EXPOSE 8080
 # Bước 2: Dùng image .NET SDK để build ứng dụng
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["WebsiteBanHangT6.csproj", "./"]
+
+# Sửa đường dẫn COPY để khớp với repo của bạn
+COPY ["WebsiteBanHangT6/WebsiteBanHangT6.csproj", "WebsiteBanHangT6/"]
+WORKDIR "/src/WebsiteBanHangT6"
+
 RUN dotnet restore "./WebsiteBanHangT6.csproj"
 COPY . .
 RUN dotnet publish "./WebsiteBanHangT6.csproj" -c Release -o /app/publish
